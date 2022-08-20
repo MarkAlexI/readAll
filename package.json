@@ -1,0 +1,26 @@
+{
+  "name": "readall",
+  "version": "1.0.0",
+  "description": "Simple reader for another types of files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkAlexI/readAll.git"
+  },
+  "keywords": [
+    "readall",
+    "typescript"
+  ],
+  "author": "MarkAlexI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarkAlexI/readAll/issues"
+  },
+  "homepage": "https://github.com/MarkAlexI/readAll#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

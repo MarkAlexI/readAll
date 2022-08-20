@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "removeComments": true,
+    "outDir": "src",
+    "sourceMap": true,
+    "outFile": "./src/index.js",
+  },
+  "moduleResolution": "node",
+  "files": [
+    "./src/index.ts",
+  ]
+}
