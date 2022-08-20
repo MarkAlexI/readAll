@@ -3,15 +3,17 @@
 function readFile(fileList) {
   const file: File = fileList.files[0];
   
-  const reader = new FileReader();
+  const getData = new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
   
-  reader.readAsText(file);
+    reader.readAsText(file);
   
-  reader.onload = function () {
-    console.log(reader.result);
-  }
+    reader.onload = () => resolve(<string>reader.result);
   
-  reader.onerror = function () {
-    console.log(reader.error);
-  }
+    reader.onerror = () => reject(reader.error);
+  });
+  
+  getData
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
 }
