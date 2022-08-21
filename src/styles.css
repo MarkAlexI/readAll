@@ -1,0 +1,37 @@
+body {
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.readZone {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+  border: red solid 3px;
+  font-size: 5em;
+  font-weight: bold;
+  color: lightgoldenrodyellow;
+  background-color: sandybrown;
+  border-radius: 15px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.readZone:hover {
+  border: yellowgreen solid 3px;
+}
+
+p {
+  line-height: 1.4;
+  font-size: 2rem;
+  text-align: center;
+  color: indianred;
+}
+
+input {
+  display: none;
+}
