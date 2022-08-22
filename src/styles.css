@@ -5,7 +5,7 @@ body {
   align-items: center;
 }
 
-.readZone {
+#readZone {
   width: 200px;
   height: 200px;
   display: flex;
@@ -21,7 +21,7 @@ body {
   cursor: pointer;
 }
 
-.readZone:hover {
+#readZone:hover {
   border: yellowgreen solid 3px;
 }
 
@@ -32,6 +32,6 @@ p {
   color: indianred;
 }
 
-input {
+#fileinput {
   display: none;
 }

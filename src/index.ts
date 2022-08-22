@@ -1,16 +1,23 @@
 'use strict';
 
-function readFile(fileList) {
-  const file: File = fileList.files[0];
+const readZone = document.getElementById('readZone') as HTMLElement;
+
+const input= document.getElementById('fileinput') as HTMLInputElement | null;
+
+
+input.addEventListener('change', readFile);
+
+function readFile(event: Event): void {
+  const file: File = (<HTMLInputElement>event.target).files[0];
   
   const getData = new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
+    const reader: FileReader = new FileReader();
   
     reader.readAsText(file);
   
-    reader.onload = () => resolve(<string>reader.result);
+    reader.onload = (event: Event) => resolve(<string>reader.result);
   
-    reader.onerror = () => reject(reader.error);
+    reader.onerror = (event: Event) => reject(reader.error);
   });
   
   getData

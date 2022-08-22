@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "module": "amd",
     "target": "es2015",
     "removeComments": true,
     "outDir": "src",
+    "noImplicitAny": true,
     "sourceMap": true,
-    "outFile": "./src/index.js",
+    "outFile": "./src/index.js"
   },
   "moduleResolution": "node",
   "files": [
