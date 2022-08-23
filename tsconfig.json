@@ -6,7 +6,8 @@
     "outDir": "src",
     "noImplicitAny": true,
     "sourceMap": true,
-    "outFile": "./src/index.js"
+    "outFile": "./src/index.js",
+    "lib": ["dom"]
   },
   "moduleResolution": "node",
   "files": [

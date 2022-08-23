@@ -1,6 +1,9 @@
 'use strict';
 const readZone = document.getElementById('readZone');
 const input = document.getElementById('fileinput');
+document.addEventListener('dragover', (event) => event.preventDefault());
+document.addEventListener('drop', (event) => event.preventDefault());
+readZone.addEventListener('click', (event) => input.click());
 input.addEventListener('change', readFile);
 function readFile(event) {
     const file = event.target.files[0];
@@ -11,7 +14,7 @@ function readFile(event) {
         reader.onerror = (event) => reject(reader.error);
     });
     getData
-        .then(data => console.log(data))
+        .then(data => document.body.innerHTML = `<pre>${data}</pre>`)
         .catch(error => console.log(error));
 }
 //# sourceMappingURL=index.js.map

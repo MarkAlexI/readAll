@@ -5,6 +5,9 @@ const readZone = document.getElementById('readZone') as HTMLElement;
 const input= document.getElementById('fileinput') as HTMLInputElement | null;
 
 
+document.addEventListener('dragover', (event: Event) => event.preventDefault());
+document.addEventListener('drop', (event: Event) => event.preventDefault());
+readZone.addEventListener('click', (event: Event) => input.click());
 input.addEventListener('change', readFile);
 
 function readFile(event: Event): void {
@@ -21,6 +24,6 @@ function readFile(event: Event): void {
   });
   
   getData
-    .then(data => console.log(data))
+    .then(data => document.body.innerHTML = `<pre>${data}</pre>`)
     .catch(error => console.log(error));
 }
