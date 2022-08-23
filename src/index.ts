@@ -7,11 +7,20 @@ const input= document.getElementById('fileinput') as HTMLInputElement | null;
 
 document.addEventListener('dragover', (event: Event) => event.preventDefault());
 document.addEventListener('drop', (event: Event) => event.preventDefault());
-readZone.addEventListener('click', (event: Event) => input.click());
-input.addEventListener('change', readFile);
 
-function readFile(event: Event): void {
+readZone.addEventListener('click', (event: Event) => input.click());
+readZone.addEventListener('drag', (event: DragEvent) => {
+  event.preventDefault();
+  const file: File = event.dataTransfer.files[0];
+  readFile(file);
+});
+
+input.addEventListener('change', (event: Event) => {
   const file: File = (<HTMLInputElement>event.target).files[0];
+  readFile(file)
+});
+
+function readFile(file: File): void {
   
   const getData = new Promise<string>((resolve, reject) => {
     const reader: FileReader = new FileReader();

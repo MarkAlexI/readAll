@@ -4,9 +4,16 @@ const input = document.getElementById('fileinput');
 document.addEventListener('dragover', (event) => event.preventDefault());
 document.addEventListener('drop', (event) => event.preventDefault());
 readZone.addEventListener('click', (event) => input.click());
-input.addEventListener('change', readFile);
-function readFile(event) {
+readZone.addEventListener('drag', (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    readFile(file);
+});
+input.addEventListener('change', (event) => {
     const file = event.target.files[0];
+    readFile(file);
+});
+function readFile(file) {
     const getData = new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsText(file);
