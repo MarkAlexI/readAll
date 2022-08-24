@@ -14,6 +14,8 @@ input.addEventListener('change', (event) => {
     readFile(file);
 });
 function readFile(file) {
+    readZone.remove();
+    input.remove();
     const getData = new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsText(file);
