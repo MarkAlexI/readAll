@@ -16,6 +16,14 @@ input.addEventListener('change', (event) => {
 function readFile(file) {
     readZone.remove();
     input.remove();
+    if (file.type.startsWith('text')) {
+        readText(file);
+    }
+    else {
+        document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
+    }
+}
+function readText(file) {
     const getData = new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsText(file);

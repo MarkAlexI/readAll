@@ -25,12 +25,20 @@ function readFile(file: File): void {
   readZone.remove();
   input.remove();
   
-  const getData = new Promise<string>((resolve, reject) => {
-    const reader: FileReader = new FileReader();
-  
-    reader.readAsText(file);
-  
-    reader.onload = (event: Event) => resolve(<string>reader.result);
+  if (file.type.startsWith('text')) {
+    readText(file);
+  } else {
+    document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
+  }
+}
+
+function readText(file: File) {
+  const getData = new Promise < string > ((resolve, reject) => {
+        const reader: FileReader = new FileReader();
+
+        reader.readAsText(file);
+
+        reader.onload = (event: Event) => resolve(<string>reader.result);
   
     reader.onerror = (event: Event) => reject(reader.error);
   });
