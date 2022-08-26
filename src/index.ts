@@ -31,6 +31,9 @@ function readFile(file: File): void {
     readImage(file);
   } else {
     document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   }
 }
 
