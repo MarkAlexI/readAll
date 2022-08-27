@@ -46,4 +46,10 @@ function readImage(file) {
     document.body.append(image);
     URL.revokeObjectURL(image.src);
 }
+function readAudio(file) {
+    const audio = document.createElement('audio');
+    audio.src = URL.createObjectURL(file);
+    document.body.append(audio);
+    URL.revokeObjectURL(audio.src);
+}
 //# sourceMappingURL=index.js.map

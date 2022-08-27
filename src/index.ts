@@ -62,3 +62,13 @@ function readImage(file: File) {
   
   URL.revokeObjectURL(image.src);
 }
+
+function readAudio(file: File): void {
+  
+  const audio = document.createElement('audio');
+  audio.src = URL.createObjectURL(file);
+  
+  document.body.append(audio);
+  
+  URL.revokeObjectURL(audio.src);
+}
