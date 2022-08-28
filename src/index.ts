@@ -29,6 +29,8 @@ function readFile(file: File): void {
     readText(file);
   } else if (file.type.startsWith('image')) {
     readImage(file);
+  } else if (file.type.startsWith('audio')) {
+    readAudio(file);
   } else {
     document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
     setTimeout(() => {
@@ -37,7 +39,7 @@ function readFile(file: File): void {
   }
 }
 
-function readText(file: File) {
+function readText(file: File): void {
   const getData = new Promise < string > ((resolve, reject) => {
         const reader: FileReader = new FileReader();
 
@@ -53,7 +55,7 @@ function readText(file: File) {
     .catch(error => console.log(error));
 }
 
-function readImage(file: File) {
+function readImage(file: File): void {
   
   const image: HTMLImageElement = document.createElement('img');
   image.src = URL.createObjectURL(file);
@@ -63,12 +65,20 @@ function readImage(file: File) {
   URL.revokeObjectURL(image.src);
 }
 
-function readAudio(file: File): void {
-  
-  const audio = document.createElement('audio');
+async function readAudio(file: File): Promise<void> {
+
+  const audio: HTMLAudioElement = document.createElement('audio');
   audio.src = URL.createObjectURL(file);
-  
+  audio.setAttribute('controls', '');
+
   document.body.append(audio);
+
+  try {
+    await audio.play();
+    console.log("Playing audio" + audio);
+  } catch (err) {
+    console.log("Failed to play, error: " + err);
+  }
   
   URL.revokeObjectURL(audio.src);
 }
