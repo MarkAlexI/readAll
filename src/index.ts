@@ -31,6 +31,8 @@ function readFile(file: File): void {
     readImage(file);
   } else if (file.type.startsWith('audio')) {
     readAudio(file);
+  } else if (file.type.startsWith('video')) {
+    readVideo(file);
   } else {
     document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
     setTimeout(() => {
@@ -75,10 +77,26 @@ async function readAudio(file: File): Promise<void> {
 
   try {
     await audio.play();
-    console.log("Playing audio" + audio);
-  } catch (err) {
-    console.log("Failed to play, error: " + err);
+    console.log('Playing audio' + audio);
+  } catch (error) {
+    console.log('Failed to play, error: ' + error);
   }
   
   URL.revokeObjectURL(audio.src);
+}
+
+async function readVideo(file: File): Promise<void> {
+  const video: HTMLVideoElement = document.createElement('video');
+  video.src = URL.createObjectURL(file);
+  video.setAttribute('controls', '');
+  video.setAttribute('loop', 'true');
+  
+  document.body.append(video);
+  
+  try {
+    await video.play();
+    console.log('Playing video' + video);
+  } catch(error) {
+    console.log('Failed to play, error: ' + error);
+  }
 }
