@@ -25,23 +25,25 @@ input.addEventListener('change', (event) => {
 function readFile(file) {
     readZone.remove();
     input.remove();
-    if (file.type.startsWith('text')) {
-        readText(file);
-    }
-    else if (file.type.startsWith('image')) {
-        readImage(file);
-    }
-    else if (file.type.startsWith('audio')) {
-        readAudio(file);
-    }
-    else if (file.type.startsWith('video')) {
-        readVideo(file);
-    }
-    else {
-        document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
-        setTimeout(() => {
-            window.location.reload();
-        }, 3000);
+    switch (file.type.slice(0, file.type.indexOf('/'))) {
+        case 'text':
+            readText(file);
+            break;
+        case 'image':
+            readImage(file);
+            break;
+        case 'audio':
+            readAudio(file);
+            break;
+        case 'video':
+            readVideo(file);
+            break;
+        default:
+            document.body.innerHTML = `<h2>Method for reading <span>${file.type}</span> not implement.</h2>`;
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+            break;
     }
 }
 function readText(file) {
@@ -84,6 +86,7 @@ function readVideo(file) {
         video.setAttribute('controls', '');
         video.setAttribute('loop', 'true');
         document.body.append(video);
+        URL.revokeObjectURL(video.src);
         try {
             yield video.play();
             console.log('Playing video' + video);

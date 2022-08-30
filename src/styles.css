@@ -36,7 +36,9 @@ p {
   display: none;
 }
 
-img {
+img,
+audio,
+video {
   max-width: 90vw;
   max-height: 90vh;
 }
