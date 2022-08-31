@@ -25,6 +25,10 @@ input.addEventListener('change', (event) => {
 function readFile(file) {
     readZone.remove();
     input.remove();
+    if (file.type.endsWith('pdf')) {
+        readPDF(file);
+        return;
+    }
     switch (file.type.slice(0, file.type.indexOf('/'))) {
         case 'text':
             readText(file);
@@ -95,5 +99,11 @@ function readVideo(file) {
             console.log('Failed to play, error: ' + error);
         }
     });
+}
+function readPDF(file) {
+    const iframe = document.createElement('iframe');
+    iframe.src = URL.createObjectURL(file);
+    document.body.append(iframe);
+    URL.revokeObjectURL(iframe.src);
 }
 //# sourceMappingURL=index.js.map

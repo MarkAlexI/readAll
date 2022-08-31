@@ -25,6 +25,11 @@ function readFile(file: File): void {
   readZone.remove();
   input.remove();
   
+  if (file.type.endsWith('pdf')) {
+    readPDF(file);
+    return;
+  }
+  
   switch (file.type.slice(0, file.type.indexOf('/'))) {
     case 'text':
       readText(file);
@@ -106,4 +111,13 @@ async function readVideo(file: File): Promise<void> {
   } catch(error) {
     console.log('Failed to play, error: ' + error);
   }
+}
+
+function readPDF(file: File): void {
+  const iframe: HTMLIFrameElement = document.createElement('iframe');
+  
+  iframe.src = URL.createObjectURL(file);
+  
+  document.body.append(iframe);
+  URL.revokeObjectURL(iframe.src);
 }
