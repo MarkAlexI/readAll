@@ -88,9 +88,9 @@ async function readAudio(file: File): Promise<void> {
 
   try {
     await audio.play();
-    console.log('Playing audio' + audio);
+    displayInfo('Playing audio ' + file.name);
   } catch (error) {
-    console.log('Failed to play, error: ' + error);
+    displayInfo('Failed to play, error: ' + error);
   }
   
   URL.revokeObjectURL(audio.src);
@@ -107,9 +107,9 @@ async function readVideo(file: File): Promise<void> {
   
   try {
     await video.play();
-    console.log('Playing video' + video);
+    displayInfo('Playing video ' + file.name);
   } catch(error) {
-    console.log('Failed to play, error: ' + error);
+    displayInfo('Failed to play, error: ' + error);
   }
 }
 
@@ -120,4 +120,13 @@ function readPDF(file: File): void {
   
   document.body.append(iframe);
   URL.revokeObjectURL(iframe.src);
+}
+
+function displayInfo(text: string): void {
+  const hr: HTMLHRElement = document.createElement('hr');
+  const h3: HTMLElement = document.createElement('p');
+  h3.innerText = text;
+  
+  document.body.append(hr);
+  document.body.append(h3);
 }

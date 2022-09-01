@@ -75,10 +75,10 @@ function readAudio(file) {
         document.body.append(audio);
         try {
             yield audio.play();
-            console.log('Playing audio' + audio);
+            displayInfo('Playing audio ' + file.name);
         }
         catch (error) {
-            console.log('Failed to play, error: ' + error);
+            displayInfo('Failed to play, error: ' + error);
         }
         URL.revokeObjectURL(audio.src);
     });
@@ -93,10 +93,10 @@ function readVideo(file) {
         URL.revokeObjectURL(video.src);
         try {
             yield video.play();
-            console.log('Playing video' + video);
+            displayInfo('Playing video ' + file.name);
         }
         catch (error) {
-            console.log('Failed to play, error: ' + error);
+            displayInfo('Failed to play, error: ' + error);
         }
     });
 }
@@ -105,5 +105,12 @@ function readPDF(file) {
     iframe.src = URL.createObjectURL(file);
     document.body.append(iframe);
     URL.revokeObjectURL(iframe.src);
+}
+function displayInfo(text) {
+    const hr = document.createElement('hr');
+    const h3 = document.createElement('p');
+    h3.innerText = text;
+    document.body.append(hr);
+    document.body.append(h3);
 }
 //# sourceMappingURL=index.js.map
