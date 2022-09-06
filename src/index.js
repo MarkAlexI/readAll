@@ -58,7 +58,9 @@ function readText(file) {
         reader.onerror = (event) => reject(reader.error);
     });
     getData
-        .then(data => document.body.innerHTML = `<pre>${data}</pre>`)
+        .then(data => document.body.innerHTML = `<pre>${['text/html', 'text/css', 'text/javascript'].includes(file.type)
+        ? escapeHTML(data)
+        : data}</pre>`)
         .catch(error => console.log(error));
 }
 function readImage(file) {
@@ -112,5 +114,17 @@ function displayInfo(text) {
     h3.innerText = text;
     document.body.append(hr);
     document.body.append(h3);
+}
+function escapeHTML(text) {
+    return text.replace(/[<>&'"]/g, function (char) {
+        switch (char) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case `'`: return '&apos;';
+            case '"': return '&quot;';
+            default: return char;
+        }
+    });
 }
 //# sourceMappingURL=index.js.map

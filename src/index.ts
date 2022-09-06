@@ -2,20 +2,20 @@
 
 const readZone = document.getElementById('readZone') as HTMLElement;
 
-const input= document.getElementById('fileinput') as HTMLInputElement | null;
+const input = document.getElementById('fileinput') as HTMLInputElement | null;
 
 
 document.addEventListener('dragover', (event: Event) => event.preventDefault());
 document.addEventListener('drop', (event: Event) => event.preventDefault());
 
-readZone.addEventListener('click', (event: Event) => input.click());
+readZone.addEventListener('click', (event: Event) => input!.click());
 readZone.addEventListener('drag', (event: DragEvent) => {
   event.preventDefault();
-  const file: File = event.dataTransfer.files[0];
+  const file: File = event.dataTransfer!.files[0];
   readFile(file);
 });
 
-input.addEventListener('change', (event: Event) => {
+input!.addEventListener('change', (event: Event) => {
   const file: File = (<HTMLInputElement>event.target).files[0];
   readFile(file)
 });
@@ -23,7 +23,7 @@ input.addEventListener('change', (event: Event) => {
 function readFile(file: File): void {
   
   readZone.remove();
-  input.remove();
+  input!.remove();
   
   if (file.type.endsWith('pdf')) {
     readPDF(file);
@@ -64,7 +64,10 @@ function readText(file: File): void {
   });
   
   getData
-    .then(data => document.body.innerHTML = `<pre>${data}</pre>`)
+    .then(data => document.body.innerHTML = `<pre>${['text/html', 'text/css', 'text/javascript'].includes(file.type)
+        ? escapeHTML(data)
+        : data
+      }</pre>`)
     .catch(error => console.log(error));
 }
 
@@ -129,4 +132,17 @@ function displayInfo(text: string): void {
   
   document.body.append(hr);
   document.body.append(h3);
+}
+
+function escapeHTML(text: string): string {
+  return text.replace(/[<>&'"]/g, function(char: string): string {
+    switch (char) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case `'`: return '&apos;';
+      case '"': return '&quot;';
+      default: return char;
+    }
+  });
 }

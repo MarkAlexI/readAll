@@ -6,6 +6,7 @@
     "outDir": "src",
     "noImplicitAny": true,
     "sourceMap": true,
+    "noEmitOnError": true,
     "outFile": "./src/index.js",
     "lib": ["dom"]
   },
