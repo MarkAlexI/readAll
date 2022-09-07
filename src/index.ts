@@ -118,10 +118,12 @@ async function readVideo(file: File): Promise<void> {
 
 function readPDF(file: File): void {
   const iframe: HTMLIFrameElement = document.createElement('iframe');
+  const obj: HTMLObjectElement = document.createElement('object');
   
   iframe.src = URL.createObjectURL(file);
   
-  document.body.append(iframe);
+  document.body.append(obj);
+  obj.appendChild(iframe);
   URL.revokeObjectURL(iframe.src);
 }
 

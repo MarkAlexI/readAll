@@ -104,8 +104,10 @@ function readVideo(file) {
 }
 function readPDF(file) {
     const iframe = document.createElement('iframe');
+    const obj = document.createElement('object');
     iframe.src = URL.createObjectURL(file);
-    document.body.append(iframe);
+    document.body.append(obj);
+    obj.appendChild(iframe);
     URL.revokeObjectURL(iframe.src);
 }
 function displayInfo(text) {
