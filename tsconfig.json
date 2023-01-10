@@ -12,6 +12,6 @@
   },
   "moduleResolution": "node",
   "files": [
-    "./src/index.ts",
+    "./src/index.ts"
   ]
 }
